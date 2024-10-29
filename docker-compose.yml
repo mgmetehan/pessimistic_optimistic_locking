@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'  # Use a more recent version
 services:
   postgres-db:
     image: 'postgres:latest'
@@ -7,3 +7,23 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: toor
+      POSTGRES_DB: test_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pessimistic_optimistic_locking:latest
+    ports:
+      - "8088:8088"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/test_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: toor
+    depends_on:
+      - postgres-db
+
+volumes:
+  postgres_data:

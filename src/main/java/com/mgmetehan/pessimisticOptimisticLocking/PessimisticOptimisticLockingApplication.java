@@ -18,7 +18,7 @@ public class PessimisticOptimisticLockingApplication implements CommandLineRunne
         SpringApplication.run(PessimisticOptimisticLockingApplication.class, args);
     }
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -26,20 +26,21 @@ public class PessimisticOptimisticLockingApplication implements CommandLineRunne
                 Product.builder()
                         .name("Product A")
                         .price(BigDecimal.valueOf(100.00))
-                        .stock(10L)
+                        .stock(1000L)
                         .build(),
                 Product.builder()
                         .name("Product B")
                         .price(BigDecimal.valueOf(200.00))
-                        .stock(20L)
+                        .stock(1000L)
                         .build(),
                 Product.builder()
                         .name("Product C")
                         .price(BigDecimal.valueOf(300.00))
-                        .stock(30L)
+                        .stock(1000L)
                         .build()
         );
 
         productRepository.saveAll(products);
     }
 }
+

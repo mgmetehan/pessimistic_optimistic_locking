@@ -11,6 +11,6 @@ EXPOSE 8088
 COPY --from=build /app/target/*.jar /app/app.jar
 ENTRYPOINT ["java","-jar","/app/app.jar"]
 
-#docker build . -t pessimisticoptimisticlocking
+#docker build . -t pessimistic_optimistic_locking
 #docker images
-#docker run -p 8088:8088 -t pessimisticoptimisticlocking
+#docker run -p 8088:8088 -t pessimistic_optimistic_locking

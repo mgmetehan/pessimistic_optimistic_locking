@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
     private final ProductService productService;
 
-    @PostMapping("/{id}/reduce-stock")
-    public ResponseEntity<String> reduceStock(@PathVariable Long id) {
-        boolean isReduced = productService.reduceStock(id);
+    @PostMapping("/{id}/{type}/reduce-stock")
+    public ResponseEntity<String> reduceStock(@PathVariable Long id, @PathVariable String type) {
+        boolean isReduced = productService.reduceStock(id, type);
         if (isReduced) {
             return ResponseEntity.ok("Stock reduced successfully.");
         } else {

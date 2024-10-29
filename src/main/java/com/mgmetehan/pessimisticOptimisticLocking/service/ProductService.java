@@ -21,21 +21,25 @@ public class ProductService {
     }
 
     public Product updateProduct(Long id, Long stock) {
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
         product.setStock(stock);
         return productRepository.save(product);
     }
 
     public Product updateProductWithPessimisticLock(Long id, Long stock) {
         productRepository.updateProductStock(id, stock);
-        return productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
     }
 
-    public boolean reduceStock(Long productId) {
-        Product product = productRepository.findById(productId)
-                .orElse(null);
+    public boolean reduceStock(Long productId, String type) {
+        Product product = null;
+        if ("pessimistic".equals(type)) {
+            product = productRepository.findWithPessimisticLock(productId);
+        } else if ("optimistic".equals(type)) {
+            product = productRepository.findWithOptimisticLock(productId);
+        } else {
+            product = productRepository.findById(productId).orElse(null);
+        }
 
         if (product == null || product.getStock() <= 0) {
             return false;
