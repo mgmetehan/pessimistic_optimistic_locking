@@ -57,6 +57,8 @@ Spring Boot'ta *Pessimistic Locking* (Kotumser Kilitleme), veritabani tablosunda
 
 ---
 
+> **Uyari:** Transaction olmadan, pessimistic ve optimistic locking calismaz ve beklenen veritabani tutarliligi saglanamaz. Bu nedenle, bu mekanizmalari kullanirken her zaman islemlerin (transactions) icinde kalmaya ozen gostermelisiniz.
+
 ## Spring Boot Optimistic Locking
 
 **Optimistic Locking** (Iyimser Kilitleme), Spring Boot ile JPA'da, cok kullanicili ortamlarda ayni verinin birden fazla kullanici tarafindan guncellenmesini yonetmek icin kullanilan bir mekanizmadir. Temel amaci, veri tutarliligini saglamaktir. Bu yontem, veriye erisim sirasinda "kilit" kullanmaz; bunun yerine, veri guncellenirken bir cakisma olup olmadigini kontrol eder. Kontrol genellikle bir "versiyon" alani ile gerceklestirilir. Veriyi guncellemek isteyen her islem, bu versiyon alanini kontrol eder ve versiyon degerinin degismediginden emin olur. Eger baska bir islem ayni kaynagi guncellemisse, versiyon degeri degisecegi icin ilk islem basarisiz olur.
