@@ -18,6 +18,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
     private final ProductService productService;
 
+    @GetMapping("/pessimistic/{id}")
+    public ResponseEntity<Product> getProductWithPessimisticLock(@PathVariable Long id) {
+        Product product = productService.getProductWithPessimisticLock(id);
+        return ResponseEntity.ok(product);
+    }
+
+    @PutMapping("/pessimistic/{id}/{stock}")
+    public ResponseEntity<Product> updateProductWithPessimisticLock(@PathVariable Long id, @PathVariable Long stock) {
+        Product updatedProduct = productService.updateProductWithPessimisticLock(id, stock);
+        return ResponseEntity.ok(updatedProduct);
+    }
+
+    @GetMapping("/optimistic/{id}")
+    public ResponseEntity<Product> getProductWithOptimisticLock(@PathVariable Long id) {
+        Product product = productService.getProductWithOptimisticLock(id);
+        return ResponseEntity.ok(product);
+    }
+
     @PostMapping("/{id}/{type}/reduce-stock")
     public ResponseEntity<String> reduceStock(@PathVariable Long id, @PathVariable String type) {
         boolean isReduced = productService.reduceStock(id, type);
@@ -28,27 +46,9 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/pessimistic/{id}")
-    public ResponseEntity<Product> getProductWithPessimisticLock(@PathVariable Long id) {
-        Product product = productService.getProductWithPessimisticLock(id);
-        return ResponseEntity.ok(product);
-    }
-
-    @GetMapping("/optimistic/{id}")
-    public ResponseEntity<Product> getProductWithOptimisticLock(@PathVariable Long id) {
-        Product product = productService.getProductWithOptimisticLock(id);
-        return ResponseEntity.ok(product);
-    }
-
     @PutMapping("/{id}/{stock}")
     public ResponseEntity<Product> updateProduct(@PathVariable Long id, @PathVariable Long stock) {
         Product updatedProduct = productService.updateProduct(id, stock);
-        return ResponseEntity.ok(updatedProduct);
-    }
-
-    @PutMapping("/pessimistic/{id}/{stock}")
-    public ResponseEntity<Product> updateProductWithPessimisticLock(@PathVariable Long id, @PathVariable Long stock) {
-        Product updatedProduct = productService.updateProductWithPessimisticLock(id, stock);
         return ResponseEntity.ok(updatedProduct);
     }
 }

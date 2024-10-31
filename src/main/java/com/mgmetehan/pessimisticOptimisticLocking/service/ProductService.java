@@ -16,19 +16,13 @@ public class ProductService {
         return productRepository.findWithPessimisticLock(id);
     }
 
-    public Product getProductWithOptimisticLock(Long id) {
-        return productRepository.findWithOptimisticLock(id);
-    }
-
-    public Product updateProduct(Long id, Long stock) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
-        product.setStock(stock);
-        return productRepository.save(product);
-    }
-
     public Product updateProductWithPessimisticLock(Long id, Long stock) {
         productRepository.updateProductStock(id, stock);
         return productRepository.findWithPessimisticLock(id);
+    }
+
+    public Product getProductWithOptimisticLock(Long id) {
+        return productRepository.findWithOptimisticLock(id);
     }
 
     public boolean reduceStock(Long productId, String type) {
@@ -48,5 +42,11 @@ public class ProductService {
         product.setStock(product.getStock() - 1);
         productRepository.save(product);
         return true;
+    }
+
+    public Product updateProduct(Long id, Long stock) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+        product.setStock(stock);
+        return productRepository.save(product);
     }
 }
