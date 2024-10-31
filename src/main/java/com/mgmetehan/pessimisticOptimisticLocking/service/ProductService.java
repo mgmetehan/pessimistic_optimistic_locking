@@ -28,7 +28,7 @@ public class ProductService {
 
     public Product updateProductWithPessimisticLock(Long id, Long stock) {
         productRepository.updateProductStock(id, stock);
-        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+        return productRepository.findWithPessimisticLock(id);
     }
 
     public boolean reduceStock(Long productId, String type) {
