@@ -1,5 +1,9 @@
 # pessimistic_optimistic_locking
 
+<p align="center">
+    <img src="png/products-islem.png" alt="full-text-search" width="%100" height="%100" style="border-radius: 20px">
+</p>
+
 ## Pessimistic Locking Nedir?
 
 Spring Boot'ta *Pessimistic Locking* (Kotumser Kilitleme), veritabani tablosundaki bir kaynaga ayni anda birden fazla islem yapilmasini engelleyerek verilerin tutarliligini korumak icin kullanilir. Pessimistic Locking kullanildiginda, bir islem veriyi guncellemeye veya okumaya baslamadan once kilit alir ve diger islemlerin bu kilit kalkana kadar veriye erisimini engeller.
@@ -113,6 +117,31 @@ Spring Boot'ta *Pessimistic Locking* (Kotumser Kilitleme), veritabani tablosunda
 - **Kullanim Senaryosu:** Belirli durumlarda daha fazla guvenlik saglamak icin faydalidir, ozellikle bir kaydin okunmasi ve guncellenmesi sirasinda cakismalarin onlenmesi amaciyla.
 
 ---
+
+### Hangi Durumlarda Hangi Yontem Kullanilir?
+
+1. **Pessimistic Locking**:
+   - Eger veri guncellenirken kesinlikle baska bir islem tarafindan erisilmemesi gerekiyorsa (ornegin, banka islemleri).
+   - Cakismalarin cok sik yasanmasi beklenen durumlarda.
+   - Veri tabani islemlerinin tutarlilik gerektirdigi yuksek oncelikli sistemlerde.
+
+2. **Optimistic Locking**:
+   - Cakisma ihtimalinin dusuk oldugu, daha cok okuma islemi gerektiren sistemlerde.
+   - Kilitleme olmadan islemlerin devam etmesi gereken yuksek performans gerektiren ortamlarda (ornegin, sosyal medya platformlari).
+   - Veri cakismalari sirasinda islemin tekrar baslatilmasinda sakinca olmayan durumlarda.
+
+---
+
+### Pessimistic ve Optimistic Locking'in Karsilastirilmasi
+
+| Ozellik                | Pessimistic Locking                      | Optimistic Locking                       |
+|------------------------|------------------------------------------|------------------------------------------|
+| Kilitleme              | Dogrudan kilitleme                       | Surum kontroluyle kilitleme yapilmaz     |
+| Performans             | Genelde daha dusuk                       | Daha yuksek                              |
+| Cakisma Durumu         | Cakisma yasanmaz                         | Cakisma durumunda islem basarisiz olur   |
+| Kullanim Amaci         | Cakismanin kesinlikle engellenmesi gereken durumlar | Cakisma olasiliginin dusuk oldugu durumlar |
+| Kullanim Yeri          | Bankacilik, finansal islemler            | Sosyal medya, bilgi okuma sistemleri     |
+
 
 ### Apache Benchmark Komutlari
 
