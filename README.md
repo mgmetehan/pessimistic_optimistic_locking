@@ -99,7 +99,7 @@ Spring Boot'ta *Pessimistic Locking* (Kotumser Kilitleme), veritabani tablosunda
 
 ### Kilit Turleri
 
-#### 1. Optimistic Locking (Iyimser Kilitleme)
+#### 1. **Optimistic Lock** (`OPTIMISTIC`):
 
 - **Kilit Turu:** Okuma ve yazma kilidi koymaz.
 - **Amac:** Bir nesnenin guncellenmesi sirasinda, diger islemlerin cakismasini onlemek icin kullanilir.
@@ -108,7 +108,7 @@ Spring Boot'ta *Pessimistic Locking* (Kotumser Kilitleme), veritabani tablosunda
     - Eger baska bir islem kaydi guncellemisse ve `@Version` degeri degismisse, `OptimisticLockException` hatasi firlatilir.
 - **Kullanim Senaryosu:** Dusuk cakisma beklenen senaryolar icin uygundur.
 
-#### 2. OPTIMISTIC_FORCE_INCREMENT
+#### 2. **Optimistic Force Increment** (`OPTIMISTIC_FORCE_INCREMENT`):
 
 - **Kilit Turu:** Okuma ve yazma kilidi koymaz.
 - **Amac:** Bir kaydi guncellerken her durumda `@Version` degerini artirmak icin kullanilir.
@@ -165,3 +165,24 @@ ab -n 100 -c 10 -m POST http://host.docker.internal:8088/api/v1/products/25/none
 - `-c 10`: Ayni anda 10 istegi calistirir.
 - `-m POST`: Istek yontemini POST olarak belirtir.
 
+## Tech Stack
+
+- Java 17
+- Spring Boot 3.0
+- PostgreSQL
+- Lombok
+
+## Requirements
+
+For building and running the application you need:
+
+- [JDK 17 or newer](https://www.oracle.com/java/technologies/javase-downloads.html)
+- [Maven](https://maven.apache.org)
+- [Lombok](https://projectlombok.org/)
+- [PostgreSQL](https://www.postgresql.com/)
+
+## Kaynakca:
+- https://vladmihalcea.com/optimistic-vs-pessimistic-locking/
+- https://blog.devgenius.io/pessimistic-lock-in-spring-boot-a3c44055be0f
+- https://beratyesbek.medium.com/pessimistic-and-optimistic-locking-in-jpa-spring-boot-aa59f2b906fa
+- https://www.baeldung.com/jpa-optimistic-locking
