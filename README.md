@@ -1,5 +1,11 @@
 # pessimistic_optimistic_locking
 
+# Sunum Kaydi:
+[Spring Boot ile Pessimistic ve Optimistic Locking](https://www.youtube.com/watch?v=FPZVr5qVq44)
+
+    https://www.youtube.com/watch?v=FPZVr5qVq44
+
+
 <p align="center">
     <img src="png/products-islem.png" alt="full-text-search" width="%100" height="%100" style="border-radius: 20px">
 </p>
